@@ -13,23 +13,37 @@
         div.innerHTML = "hello world"
         var viewModel = {};
 
-        // 객체의 동작을 재정의
-        // Object.defineProperty(대상객체, 객체의 속성, {
-        //     정의 할 내용
-        // });
+        // 즉시 실행 함수 (IIFE, Immediately Invoked Function Express)
+        // 정의 되자마자 즉시 실행되는 Javascript function
+        // 역할 : init과 render가 application logic에 노출 되지 않게 안에 들어있는 코드를 또 다른 scope(유효 범위) 안에 넣어두는 것
+        // 일반적으로 오픈소스 라이브러리들은 코드를 이런식으로 변수의 유효 범위를 관리하고있음
+        (function () {
+            function init() {
+                // 객체의 동작을 재정의
+                // Object.defineProperty(대상객체, 객체의 속성, {
+                //     정의 할 내용
+                // });
 
-        // defineProperty()에 의해 객체의 기본 동작이 override 되었다.
-        Object.defineProperty(viewModel, "str", {
-            // 속성에 접근했을 때의 동작을 정의
-            get: function() {
-                console.log("접근")
-            }, 
-            // 속성에 값을 할당했을 때의 동작을 정의
-            set: function(newValue) {
-                console.log("할당")
+                // defineProperty()에 의해 객체의 기본 동작이 override 되었다.
+                Object.defineProperty(viewModel, "str", {
+                    // 속성에 접근했을 때의 동작을 정의
+                    get: function() {
+                        console.log("접근")
+                    }, 
+                    // 속성에 값을 할당했을 때의 동작을 정의
+                    set: function(newValue) {
+                        console.log("할당")
+                        render(newValue);
+                    }
+                })
+            }
+
+            function render (value) {
                 div.innerHTML = newValue;
             }
-        })
+
+            init();
+        })();
 
         // vue의 핵심(Reactivity)
         // 데이터의 변화를 라이브러리에서 감시해서 알아서 화면을 자동으로 그려주는 것 
