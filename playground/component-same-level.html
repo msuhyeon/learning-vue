@@ -16,7 +16,7 @@
     <script>
         const appHeader = {
             template: '<div>header</div>',
-            props: ['propsdata']
+            props: ['propsdata'] // Root 컴포넌트에서 props로 num을 받아옴으로써 같은 컴포넌트 레벨 간 통신(app-content -> app-header) 
         }
         const appContent = {
             template: '<div>content<button v-on:click="passNum">pass</button></div>',
@@ -34,8 +34,8 @@
             },
             data: {
                 num: 0,
-            },
-            methods: {
+            }, 
+            methods: { // app-content 컴포넌트에 있던 값을 이벤트를 일으켜서 Root 컴포넌트로 이동시킴
                 deliverNum: function (value) {
                     this.num = value;
                 }
