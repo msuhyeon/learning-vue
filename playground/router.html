@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>
+        </div>
+
+        <!-- url에 따라서 뿌려지는 영역을 router-view로 정의할 수 있음 
+            router-view: vue 인스턴스에 router 인스턴스를 연결해야만 사용할 수 있음 -->
+        <router-view></router-view>
+
+        <!-- 3. router-view라는 태그에 표현한 것 -->
+        <!-- 4. 최종적으로 router-view 자리에 LoginComponent(<div>login</div>) 라는 값이 들어가게됨 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <script>
+        // 1. http://127.0.0.1:5500/playground/router.html#/login 로 주소창에 입력을 하게 되면
+        const LoginComponent = {
+            template: '<div>login</div>'
+        }
+        const MainComponent = {
+            template: '<div>main</div>'
+        }
+        const router = new VueRouter ({
+            mode: 'history', // 라우팅 할 때 url에서 # 값을 제거
+            // 페이지의 라우팅 정보. 페이지의 갯수만큼 객체의 갯수가 필요함
+            routes: [
+                {
+                    // 페이지의 url
+                    path: '/login',
+                    // 해당 url에서 표시될 컴포넌트
+                    component: LoginComponent, // 2. /login이라는 url에 해당하는 LoginComponent를 
+                },
+                {
+                    path: '/main',
+                    component: MainComponent,
+                }
+            ],
+        });
+
+        new Vue({
+            el: '#app', // 인스턴스 정의
+            router: router,
+        });
+    </script>
+</body>
+</html>
