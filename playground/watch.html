@@ -21,6 +21,12 @@
             },
             // num 값이 바뀌었을 때 마다 logText 함수를 실행하고 싶음
             // 데이터를 내장으로 넣을 수 있다. 데이터 변화에 따라 특정 모듈을 실행할 수 있다.
+            // 공식 문서에는 watch 보단 computed가 대부분의 경우에 적합하다고 나와있음
+            // computed로 해결되는 건데 굳이 watch로 구현했을 때의 단점
+            // 1. 코드가 너저분 해 보일 수 있음
+            // 2. computed가 캐싱과 같은 내부적인 튜닝이 더 많이 돼 있음
+            // https://vuejs.org/guide/essentials/computed.html
+            // computed는 단순한 텍스트 변환 류의 로직 처리, HTTP 요청 X
             watch: {
                 num: function () {
                     this.logText();
