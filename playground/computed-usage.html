@@ -12,9 +12,9 @@
     </style>
 </head>
 <body>
-    <div id="id">
+    <div id="app">
         <!-- isError 값에 따라 클래스명이 바뀜 -->
-        <p v-vind:class="{ warning: isError }">Hello</p>
+        <p v-bind:class="errorTextColor">Hello</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -26,10 +26,11 @@
                 // cname: 'blue-text',
                 isError: false
             },
+            // computed 속성은 클래스 바인딩이라 기본적인 바인딩에 엮을 수 있다. 
             computed: {
                 errorTextColor: function (){
-
-                }   
+                    return this.isError ? 'warning' : null;
+                }
             }
         });
     </script>
